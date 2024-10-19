@@ -1,0 +1,15 @@
+#include <stdio.h>
+const int pi=22/7;
+int main() {
+    int area;
+    int circumference;
+    int r;
+    printf("enter the radius of circle");
+    scanf("%d",&r);
+    area=pi*r*r;
+    printf("area of the circle is %d\n",area);
+    
+    circumference=2*pi*r;
+    printf("circumference of the circle is %d\n",circumference);
+    return 0;
+}
