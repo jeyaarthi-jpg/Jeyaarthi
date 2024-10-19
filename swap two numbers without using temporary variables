@@ -1,22 +1,20 @@
-#include<stdio.h>
+#include <stdio.h>
 int main()
 {
-    int num1;
-    int num2;
-    printf("enter the num1\n");
-    scanf("%d",&num1);
-    printf("enter the num2\n");
-    scanf("%d",&num2);
-    if(num1>num2)
-    {
-        printf("num1 greater than num2");
-    }
-    else if (num2>num1)
-    {
-        printf("num2 greater than num1");
-    }
-    else{
-        printf(" both are equal");
-    }
+    int num1, num2,temp;
+    printf("Enter first number: ");
+    scanf("%d", &num1);
+    printf("Enter second number: ");
+    scanf("%d", &num2);
+    printf("Before swapping:\n");
+    printf("Number 1 = %d\n", num1);
+    printf("Number 2 = %d\n", num2);
+    temp = num1;
+    num1 = num2;
+    num2 = temp;
+    printf("After swapping:\n");
+    printf("Number 1 = %d\n", num1);
+    printf("Number 2 = %d\n", num2);
+
     return 0;
 }
