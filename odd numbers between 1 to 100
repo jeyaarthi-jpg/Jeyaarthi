@@ -1,0 +1,17 @@
+#include <stdio.h>
+int sumOfOddNumbers(int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; i++) {
+        if (i % 2 != 0) {
+            sum += i;
+        }
+    }
+    return sum;
+}
+int main() {
+    int start = 1;
+    int end = 100;
+    int sum = sumOfOddNumbers(start, end);
+    printf("Sum of Odd numbers between %d and %d: %d\n", start, end, sum);
+    return 0;
+}
