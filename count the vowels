@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int countVowels(char* str) {
+    int count = 0;
+    while (*str) {
+        char ch = tolower(*str);
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            count++;
+        }
+        str++;
+    }
+    return count;
+}
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    int vowels = countVowels(str);
+    printf("Number of vowels: %d\n", vowels);
+    return 0;
+}
