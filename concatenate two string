@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+void concatenateStrings(char dest[], char src1[], char src2[]) {
+    int i, j;
+    for (i = 0; src1[i] != '\0'; i++) {
+        dest[i] = src1[i];
+    }
+    for (j = 0; src2[j] != '\0'; j++, i++) {
+        dest[i] = src2[j];
+    }
+    dest[i] = '\0';
+}
+int main() {
+    char src1[100], src2[100], dest[200];
+    printf("Enter first string: ");
+    scanf("%s", src1);
+    printf("Enter second string: ");
+    scanf("%s", src2);
+    concatenateStrings(dest, src1,src2);
+    printf("Concatenated string: %s\n", dest);
+
+    return 0;
+}
