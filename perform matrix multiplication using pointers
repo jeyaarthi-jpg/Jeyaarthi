@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+#define ROWS1 2
+#define COLS1 3
+#define ROWS2 3
+#define COLS2 2
+
+void print_matrix(int *matrix, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", *(matrix + i * cols + j));
+        }
+        printf("\n");
+    }  }
+    
+void multiply_matrices(int *matrix1, int *matrix2, int *result) {
+    for (int i = 0; i < ROWS1; i++) {
+        for (int j = 0; j < COLS2; j++) {
+            *(result + i * COLS2 + j) = 0;
+            for (int k = 0; k < COLS1; k++) {
+                *(result + i * COLS2 + j) += *(matrix1 + i * COLS1 + k) * *(matrix2 + k * COLS2 + j);
+            }        }    }    }
+
+int main() {
+    int matrix1[ROWS1][COLS1] = {{1, 2, 3}, {4, 5, 6}};
+    int matrix2[ROWS2][COLS2] = {{7, 8}, {9, 10}, {11, 12}};
+    int result[ROWS1][COLS2];
+
+    printf("Matrix 1:\n");
+    print_matrix((int *)matrix1, ROWS1, COLS1);
+
+    printf("Matrix 2:\n");
+    print_matrix((int *)matrix2, ROWS2, COLS2);
+
+   multiply_matrices((int *)matrix1, (int *)matrix2, (int *)result);
+
+    printf("Product of matrices:\n");
+    print_matrix((int *)result, ROWS1, COLS2);
+
+    return 0;
+}
