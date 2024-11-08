@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  
+
+    printf("Pointer Arithmetic Demonstrations:\n");
+     printf("Value of *ptr: %d\n", *ptr);
+    ptr++;
+    printf("Value of *ptr after increment: %d\n", *ptr);
+
+    ptr--;
+    ptr--;
+    printf("Value of *ptr after decrement: %d\n", *ptr);
+    printf("Value of *(ptr + 2): %d\n", *(ptr + 2));
+    printf("Value of *(ptr - 1): %d\n", *(ptr - 1));
+
+    int *ptr2 = arr + 4;
+    printf("Difference between ptr2 and ptr: %d\n", ptr2 - ptr);
+
+    return 0;
+}
