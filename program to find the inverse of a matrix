@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <math.h>
+
+#define N 3
+
+void print_matrix(double matrix[N][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%.2f ", matrix[i][j]);
+        }
+        printf("\n");
+    }    }
+
+void inverse_matrix(double matrix[N][N]) {
+    double aug_matrix[N][2*N];
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            aug_matrix[i][j] = matrix[i][j];
+        }
+        aug_matrix[i][i + N] = (i == N - 1) ? 1.0 : 0.0; 
+    }
+
+   for (int i = 0; i < N; i++) {
+        int max_row = i;
+        for (int k = i + 1; k < N; k++) {
+            if (fabs(aug_matrix[k][i]) > fabs(aug_matrix[max_row][i])) {
+                max_row = k;
+            }         }
+
+        for (int j = 0; j < 2*N; j++) {
+            double temp = aug_matrix[i][j];
+            aug_matrix[i][j] = aug_matrix[max_row][j];
+            aug_matrix[max_row][j] = temp;
+        }
+
+        double pivot = aug_matrix[i][i];
+        for (int j = 0; j < 2*N; j++) {
+            aug_matrix[i][j] /= pivot;
+        }
+
+       for (int k = 0; k < N; k++) {
+            if (k != i) {
+                double factor = aug_matrix[k][i];
+                for (int j = 0; j < 2*N; j++) {
+                    aug_matrix[k][j] -= factor * aug_matrix[i][j];
+                }            }        }    }
+
+   for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            matrix[i][j] = aug_matrix[i][j + N];
+        }    }     }
+
+int main() {
+    double matrix[N][N] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 10} 
+    };
+
+    printf("Original Matrix:\n");
+    print_matrix(matrix);
+
+    inverse_matrix(matrix);
+
+    printf("Inverse Matrix:\n");
+    print_matrix(matrix);
+
+    return 0;
+}
