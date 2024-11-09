@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int linear_search(int arr[], int target, int n) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) {
+            return i; 
+        }     }
+    return -1;  
+}
+
+int main() {
+    int arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target;
+
+    printf("Array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    printf("Enter target element: ");
+    scanf("%d", &target);
+
+    int result = linear_search(arr, target, n);
+
+    if (result != -1) {
+        printf("Target found at index %d\n", result);
+    } else {
+        printf("Target not found in the array\n");
+    }
+
+    return 0;
+}
