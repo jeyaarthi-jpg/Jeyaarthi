@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+#define N 3
+
+int determinant_2x2(int matrix[2][2]) {
+    return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+}
+
+int determinant_3x3(int matrix[N][N]) {
+    int det = 0;
+    int sub_matrix[2][2];
+
+    for (int i = 0; i < N; i++) {
+        int sub_row = 0;
+        for (int row = 1; row < N; row++) {
+            int sub_col = 0;
+            for (int col = 0; col < N; col++) {
+                if (col == i) continue;
+                sub_matrix[sub_row][sub_col++] = matrix[row][col];
+            }
+            sub_row++;
+        }
+        det += ((i % 2 == 0) ? 1 : -1) * matrix[0][i] * determinant_2x2(sub_matrix);
+    }
+
+    return det;
+}
+
+void print_matrix(int matrix[N][N]) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }      }
+
+int main() {
+    int matrix[N][N] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    printf("Matrix:\n");
+    print_matrix(matrix);
+
+    int det = determinant_3x3(matrix);
+
+    printf("Determinant: %d\n", det);
+
+    return 0;
+}
