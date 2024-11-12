@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_CANDIDATES 10
+#define MAX_VOTERS 100
+
+typedef struct {
+    char name[100];
+    int votes;
+} Candidate;
+
+Candidate candidates[MAX_CANDIDATES];
+int candidate_count = 0;
+int voter_count = 0;
+
+void add_candidate() {
+    printf("Enter candidate name: ");
+    scanf("%s", candidates[candidate_count].name);
+    candidates[candidate_count].votes = 0;
+    candidate_count++;
+}
+
+void vote() {
+    char name[100];
+    printf("Enter your name: ");
+    scanf("%s", name);
+    printf("Enter candidate name: ");
+    scanf("%s", name);
+
+    for (int i = 0; i < candidate_count; i++) {
+        if (strcmp(candidates[i].name, name) == 0) {
+            candidates[i].votes++;
+            printf("Vote cast successfully!\n");
+            return;
+        }
+    }
+    printf("Candidate not found!\n");
+}
+
+void display_results() {
+    printf("Election Results:\n");
+    for (int i = 0; i < candidate_count; i++) {
+        printf("%s: %d votes\n", candidates[i].name, candidates[i].votes);
+    }
+
+    int max_votes = 0;
+    char winner[100];
+
+    for (int i = 0; i < candidate_count; i++) {
+        if (candidates[i].votes > max_votes) {
+            max_votes = candidates[i].votes;
+            strcpy(winner, candidates[i].name);
+        }
+    }
+    printf("Winner: %s with %d votes\n", winner, max_votes);
+}
+
+int main() {
+    int choice;
+    do {
+        printf("Election Simulation System\n");
+        printf("=================================\n");
+        printf("1. Add Candidate\n");
+        printf("2. Vote\n");
+        printf("3. Display Results\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_candidate();
+                break;
+            case 2:
+                vote();
+                voter_count++;
+                break;
+            case 3:
+                display_results();
+                break;
+            case 4:
+                printf("Thank you for using the Election Simulation System!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
