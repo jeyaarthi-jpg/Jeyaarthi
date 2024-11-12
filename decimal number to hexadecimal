@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+void decimal_to_hexadecimal(int decimal) {
+    char hex[32]; 
+    int i = 0;
+
+    while (decimal > 0) {
+        int remainder = decimal % 16;
+        if (remainder < 10) {
+            hex[i++] = remainder + '0'; 
+        } else {
+            hex[i++] = remainder + 'A' - 10; 
+        }
+        decimal /= 16;
+    }
+
+     printf("Hexadecimal: ");
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%c", hex[j]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int decimal;
+
+    printf("Enter decimal number: ");
+    scanf("%d", &decimal);
+
+    decimal_to_hexadecimal(decimal);
+
+    return 0;
+}
