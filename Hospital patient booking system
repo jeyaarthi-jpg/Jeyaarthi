@@ -1,0 +1,131 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PATIENTS 100
+
+typedef struct {
+    char name[100];
+    char address[200];
+    char phone[20];
+    char disease[100];
+    char admit_date[10];
+    char discharge_date[10];
+    int days_stayed;
+    double bill;
+} Patient;
+
+Patient patients[MAX_PATIENTS];
+int patient_count = 0;
+
+void add_patient() {
+    printf("Enter patient name: ");
+    scanf("%s", patients[patient_count].name);
+    printf("Enter patient address: ");
+    scanf("%s", patients[patient_count].address);
+    printf("Enter patient phone number: ");
+    scanf("%s", patients[patient_count].phone);
+    printf("Enter patient disease: ");
+    scanf("%s", patients[patient_count].disease);
+    printf("Enter admit date (DD/MM/YYYY): ");
+    scanf("%s", patients[patient_count].admit_date);
+    patients[patient_count].discharge_date[0] = '\0';
+    patients[patient_count].days_stayed = 0;
+    patients[patient_count].bill = 0.0;
+    patient_count++;
+    printf("Patient added successfully!\n");
+}
+
+void discharge_patient() {
+    char name[100];
+    printf("Enter patient name: ");
+    scanf("%s", name);
+    for (int i = 0; i < patient_count; i++) {
+        if (strcmp(patients[i].name, name) == 0) {
+            printf("Enter discharge date (DD/MM/YYYY): ");
+            scanf("%s", patients[i].discharge_date);
+            printf("Enter days stayed: ");
+            scanf("%d", &patients[i].days_stayed);
+            printf("Enter bill amount: $");
+            scanf("%lf", &patients[i].bill);
+            printf("Patient discharged successfully!\n");
+            return;
+        }
+    }
+    printf("Patient not found!\n");
+}
+
+void generate_bill() {
+    char name[100];
+    printf("Enter patient name: ");
+    scanf("%s", name);
+    for (int i = 0; i < patient_count; i++) {
+        if (strcmp(patients[i].name, name) == 0) {
+            printf("Patient Bill:\n");
+            printf("Name: %s\n", patients[i].name);
+            printf("Disease: %s\n", patients[i].disease);
+            printf("Admit Date: %s\n", patients[i].admit_date);
+            printf("Discharge Date: %s\n", patients[i].discharge_date);
+            printf("Days Stayed: %d\n", patients[i].days_stayed);
+            printf("Bill Amount: $%.2f\n", patients[i].bill);
+            return;
+        }
+    }
+    printf("Patient not found!\n");
+}
+
+// Function to search patient
+void search_patient() {
+    char name[100];
+    printf("Enter patient name: ");
+    scanf("%s", name);
+    for (int i = 0; i < patient_count; i++) {
+        if (strcmp(patients[i].name, name) == 0) {
+            printf("Patient Found:\n");
+            printf("Name: %s\n", patients[i].name);
+            printf("Address: %s\n", patients[i].address);
+            printf("Phone Number: %s\n", patients[i].phone);
+            printf("Disease: %s\n", patients[i].disease);
+            printf("Admit Date: %s\n", patients[i].admit_date);
+            printf("Discharge Date: %s\n", patients[i].discharge_date);
+            return;
+        }
+    }
+    printf("Patient not found!\n");
+}
+
+int main() {
+    int choice;
+    do {
+        printf("Hospital Patient Record System\n");
+        printf("=================================\n");
+        printf("1. Add Patient\n");
+        printf("2. Discharge Patient\n");
+        printf("3. Generate Bill\n");
+        printf("4. Search Patient\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_patient();
+                break;
+            case 2:
+                discharge_patient();
+                break;
+            case 3:
+                generate_bill();
+                break;
+            case 4:
+                search_patient();
+                break;
+            case 5:
+                printf("Thank you for using the Hospital Patient Record System!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
