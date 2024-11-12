@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+int binary_to_decimal(char binary[]) {
+    int decimal = 0;
+    int base = 1;
+
+    for (int i = strlen(binary) - 1; i >= 0; i--) {
+        if (binary[i] == '1') {
+            decimal += base;
+        }
+        base *= 2;
+    }
+
+    return decimal;
+}
+
+void decimal_to_binary(int decimal, char binary[]) {
+    int i = 0;
+
+    while (decimal > 0) {
+        binary[i++] = (decimal % 2) + '0';
+        decimal /= 2;
+    }
+
+    binary[i] = '\0';
+
+     int length = strlen(binary);
+    for (int j = 0; j < length / 2; j++) {
+        char temp = binary[j];
+        binary[j] = binary[length - j - 1];
+        binary[length - j - 1] = temp;
+    }
+}
+
+int main() {
+    char binary1[32];
+    char binary2[32];
+
+    printf("Enter first binary number: ");
+    scanf("%s", binary1);
+
+    printf("Enter second binary number: ");
+    scanf("%s", binary2);
+
+    int decimal1 = binary_to_decimal(binary1);
+    int decimal2 = binary_to_decimal(binary2);
+
+    int sum = decimal1 + decimal2;
+
+    char binary_sum[32];
+    decimal_to_binary(sum, binary_sum);
+
+    printf("Sum of binary numbers: %s\n", binary_sum);
+
+    return 0;
+}
