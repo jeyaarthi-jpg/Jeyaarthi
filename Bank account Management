@@ -1,0 +1,110 @@
+#include <stdio.h>
+
+#define TRANSACTION_LIMIT 5
+#define TRANSACTION_FEE 0.50
+
+typedef struct {
+    char account_number[20];
+    char account_holder[50];
+    double balance;
+    int transactions;
+} BankAccount;
+
+BankAccount create_account() {
+    BankAccount account;
+    printf("Enter account number: ");
+    scanf("%s", account.account_number);
+    printf("Enter account holder's name: ");
+    scanf("%s", account.account_holder);
+    account.balance = 0.0;
+    account.transactions = 0;
+    return account;
+}
+
+void display_account_info(BankAccount account) {
+    printf("Account Number: %s\n", account.account_number);
+    printf("Account Holder: %s\n", account.account_holder);
+    printf("Balance: $%.2f\n", account.balance);
+    printf("Transactions: %d\n", account.transactions);
+}
+
+void deposit(BankAccount *account) {
+    double amount;
+    printf("Enter amount to deposit: $");
+    scanf("%lf", &amount);
+    if (amount > 0) {
+        account->balance += amount;
+        account->transactions++;
+        printf("Deposit successful. New balance: $%.2f\n", account->balance);
+    } else {
+        printf("Invalid deposit amount.\n");
+    }
+}
+
+void withdraw(BankAccount *account) {
+    double amount;
+    printf("Enter amount to withdraw: $");
+    scanf("%lf", &amount);
+    if (amount > 0 && amount <= account->balance) {
+        account->balance -= amount;
+        account->transactions++;
+        printf("Withdrawal successful. New balance: $%.2f\n", account->balance);
+    } else {
+        printf("Insufficient funds or invalid withdrawal amount.\n");
+    }
+}
+
+void check_balance(BankAccount account) {
+    printf("Current balance: $%.2f\n", account.balance);
+}
+
+double calculate_fee(BankAccount account) {
+    return (account.transactions - TRANSACTION_LIMIT) * TRANSACTION_FEE;
+}
+
+int main() {
+    BankAccount account = create_account();
+
+    int choice;
+    do {
+        printf("\nBank Account Menu:\n");
+        printf("1. Deposit\n");
+        printf("2. Withdraw\n");
+        printf("3. Check Balance\n");
+        printf("4. Display Account Info\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                deposit(&account);
+                break;
+            case 2:
+                withdraw(&account);
+                break;
+            case 3:
+                check_balance(account);
+                break;
+            case 4:
+                display_account_info(account);
+                break;
+            case 5:
+                printf("Thank you for banking with us!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+
+        if (account.transactions > TRANSACTION_LIMIT) {
+            double fee = calculate_fee(account);
+            if (fee > 0) {
+                account.balance -= fee;
+                printf("Transaction fee: $%.2f\n", fee);
+                printf("Updated balance: $%.2f\n", account.balance);
+            }
+        }
+    } while (choice != 5);
+
+    return 0;
+}
