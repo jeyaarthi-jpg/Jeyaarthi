@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+void print_celsius_to_fahrenheit_table(int start, int end, int step) {
+    printf("Celsius to Fahrenheit Conversion Table\n");
+    printf("=======================================\n");
+    printf("Celsius\tFahrenheit\n");
+    printf("=======================================\n");
+
+    for (int celsius = start; celsius <= end; celsius += step) {
+        double fahrenheit = (celsius * 9.0 / 5.0) + 32;
+        printf("%d\t\t%.2f\n", celsius, fahrenheit);
+    }
+}
+
+void print_fahrenheit_to_celsius_table(int start, int end, int step) {
+    printf("Fahrenheit to Celsius Conversion Table\n");
+    printf("=======================================\n");
+    printf("Fahrenheit\tCelsius\n");
+    printf("=======================================\n");
+
+    for (int fahrenheit = start; fahrenheit <= end; fahrenheit += step) {
+        double celsius = (fahrenheit - 32) * 5.0 / 9.0;
+        printf("%d\t\t%.2f\n", fahrenheit, celsius);
+    }
+}
+
+int main() {
+    int choice;
+    int start, end, step;
+
+    do {
+        printf("Temperature Conversion Table Generator\n");
+        printf("=======================================\n");
+        printf("1. Celsius to Fahrenheit\n");
+        printf("2. Fahrenheit to Celsius\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1 || choice == 2) {
+            printf("Enter starting temperature: ");
+            scanf("%d", &start);
+            printf("Enter ending temperature: ");
+            scanf("%d", &end);
+            printf("Enter step size: ");
+            scanf("%d", &step);
+
+            if (choice == 1) {
+                print_celsius_to_fahrenheit_table(start, end, step);
+            } else {
+                print_fahrenheit_to_celsius_table(start, end, step);
+            }
+        } else if (choice != 3) {
+            printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
+}
