@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+double arithmetic_series_sum(int a, int d, int n) {
+    return (n / 2.0) * (2 * a + (n - 1) * d);
+}
+
+int main() {
+    int a, d, n;
+
+    printf("Enter first term (a): ");
+    scanf("%d", &a);
+
+    printf("Enter common difference (d): ");
+    scanf("%d", &d);
+
+    printf("Enter number of terms (n): ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Invalid input. Number of terms should be positive.\n");
+    } else {
+        double sum = arithmetic_series_sum(a, d, n);
+        printf("Sum of arithmetic series: %.2f\n", sum);
+    }
+
+    return 0;
+}
