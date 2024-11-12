@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+
+void encrypt(char *message, int shift) {
+    int length = strlen(message);
+
+    for (int i = 0; i < length; i++) {
+        if (message[i] >= 'A' && message[i] <= 'Z') {
+            message[i] = 'A' + (message[i] - 'A' + shift) % 26;
+        }
+       else if (message[i] >= 'a' && message[i] <= 'z') {
+            message[i] = 'a' + (message[i] - 'a' + shift) % 26;
+        }
+    }
+}
+
+void decrypt(char *message, int shift) {
+    int length = strlen(message);
+
+    for (int i = 0; i < length; i++) {
+        if (message[i] >= 'A' && message[i] <= 'Z') {
+            message[i] = 'A' + (message[i] - 'A' - shift + 26) % 26;
+        }
+        else if (message[i] >= 'a' && message[i] <= 'z') {
+            message[i] = 'a' + (message[i] - 'a' - shift + 26) % 26;
+        }
+    }
+}
+
+int main() {
+    char message[100];
+    int shift;
+    int choice;
+
+    do {
+        printf("Caesar Cipher Program\n");
+        printf("1. Encrypt\n");
+        printf("2. Decrypt\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter message to encrypt: ");
+                scanf(" %[^\n]", message);
+                printf("Enter shift value: ");
+                scanf("%d", &shift);
+                encrypt(message, shift);
+                printf("Encrypted message: %s\n", message);
+                break;
+            case 2:
+                printf("Enter message to decrypt: ");
+                scanf(" %[^\n]", message);
+                printf("Enter shift value: ");
+                scanf("%d", &shift);
+                decrypt(message, shift);
+                printf("Decrypted message: %s\n", message);
+                break;
+            case 3:
+                printf("Thank you for using the Caesar Cipher program!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
+}
