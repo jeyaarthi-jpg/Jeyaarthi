@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+#define MAX_ASSESSMENTS 10
+
+typedef struct {
+    char name[50];
+    double weightage;
+    double score;
+} Assessment;
+
+double calculate_final_grade(Assessment assessments[], int num_assessments) {
+    double total_score = 0;
+    double total_weightage = 0;
+
+    for (int i = 0; i < num_assessments; i++) {
+        total_score += assessments[i].score * assessments[i].weightage;
+        total_weightage += assessments[i].weightage;
+    }
+
+    return (total_score / total_weightage) * 100;
+}
+
+int main() {
+    int num_assessments;
+
+    printf("Enter number of assessments (max 10): ");
+    scanf("%d", &num_assessments);
+
+    if (num_assessments <= 0 || num_assessments > MAX_ASSESSMENTS) {
+        printf("Invalid number of assessments.\n");
+        return 1;
+    }
+
+    Assessment assessments[num_assessments];
+
+    for (int i = 0; i < num_assessments; i++) {
+        printf("Enter assessment %d name: ", i + 1);
+        scanf("%s", assessments[i].name);
+
+        printf("Enter assessment %d weightage (%%): ", i + 1);
+        scanf("%lf", &assessments[i].weightage);
+
+        printf("Enter assessment %d score (out of 100): ", i + 1);
+        scanf("%lf", &assessments[i].score);
+    }
+
+    double final_grade = calculate_final_grade(assessments, num_assessments);
+
+    printf("\nAssessment Details:\n");
+    for (int i = 0; i < num_assessments; i++) {
+        printf("%s: %.2f/100 (Weightage: %.2f%%)\n", assessments[i].name, assessments[i].score, assessments[i].weightage);
+    }
+
+    printf("\nFinal Grade: %.2f%%\n", final_grade);
+
+    return 0;
+}
