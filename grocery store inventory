@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PRODUCTS 100
+
+typedef struct {
+    char name[100];
+    char description[200];
+    int quantity;
+    int reorder_point;
+    double price;
+} Product;
+
+Product products[MAX_PRODUCTS];
+int product_count = 0;
+
+void add_product() {
+    printf("Enter product name: ");
+    scanf("%s", products[product_count].name);
+    printf("Enter product description: ");
+    scanf("%s", products[product_count].description);
+    printf("Enter initial quantity: ");
+    scanf("%d", &products[product_count].quantity);
+    printf("Enter reorder point: ");
+    scanf("%d", &products[product_count].reorder_point);
+    printf("Enter price: $");
+    scanf("%lf", &products[product_count].price);
+    product_count++;
+    printf("Product added successfully!\n");
+}
+
+void remove_product() {
+    char name[100];
+    printf("Enter product name: ");
+    scanf("%s", name);
+    for (int i = 0; i < product_count; i++) {
+        if (strcmp(products[i].name, name) == 0) {
+            for (int j = i; j < product_count - 1; j++) {
+                products[j] = products[j + 1];
+            }
+            product_count--;
+            printf("Product removed successfully!\n");
+            return;
+        }
+    }
+    printf("Product not found!\n");
+}
+
+void search_product() {
+    char name[100];
+    printf("Enter product name: ");
+    scanf("%s", name);
+    for (int i = 0; i < product_count; i++) {
+        if (strcmp(products[i].name, name) == 0) {
+            printf("Product Found:\n");
+            printf("Name: %s\n", products[i].name);
+            printf("Description: %s\n", products[i].description);
+            printf("Quantity: %d\n", products[i].quantity);
+            printf("Reorder Point: %d\n", products[i].reorder_point);
+            printf("Price: $%.2f\n", products[i].price);
+            return;
+        }
+    }
+    printf("Product not found!\n");
+}
+
+void update_quantity() {
+    char name[100];
+    int quantity;
+    printf("Enter product name: ");
+    scanf("%s", name);
+    for (int i = 0; i < product_count; i++) {
+        if (strcmp(products[i].name, name) == 0) {
+            printf("Enter new quantity: ");
+            scanf("%d", &quantity);
+            products[i].quantity = quantity;
+            printf("Quantity updated successfully!\n");
+            return;
+        }
+    }
+    printf("Product not found!\n");
+}
+
+void check_reorder() {
+    printf("Products needing reorder:\n");
+    for (int i = 0; i < product_count; i++) {
+        if (products[i].quantity <= products[i].reorder_point) {
+            printf("%s\n", products[i].name);
+        }
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        printf("Grocery Store Inventory Management\n");
+        printf("=================================\n");
+        printf("1. Add Product\n");
+        printf("2. Remove Product\n");
+        printf("3. Search Product\n");
+        printf("4. Update Quantity\n");
+        printf("5. Check Reorder Status\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                add_product();
+                break;
+            case 2:
+                remove_product();
+                break;
+            case 3:
+                search_product();
+                break;
+            case 4:
+                update_quantity();
+                break;
+            case 5:
+                check_reorder();
+                break;
+            case 6:
+                printf("Thank you for using the Grocery Store Inventory Management system!\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != 6);
+
+    return 0;
+}
