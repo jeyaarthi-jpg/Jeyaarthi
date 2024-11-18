@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main()
+{   int tot_mins, hrs, mins;
+    int MINaHOUR, THRESHOLD;
+    THRESHOLD=60;
+    MINaHOUR=60;
+    scanf("%d",&tot_mins);
+    if(tot_mins>THRESHOLD){
+        hrs = (tot_mins / MINaHOUR);
+        mins = (tot_mins % MINaHOUR);
+        if (hrs>24)
+        printf("Invalid input");
+        else 
+        printf("%d Hours and %d Minutes",hrs,mins);   }
+    else  {  
+        printf("the delayed time is %d",tot_mins);  }
+	return 0;
+}
