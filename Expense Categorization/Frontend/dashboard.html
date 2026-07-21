@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="navbar">
+
+        <h2>
+            Expense Categorizer
+        </h2>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <div class="upload-card">
+
+        <h3>
+            Upload Bank Statement
+        </h3>
+
+        <input
+            type="file"
+            id="pdfFile">
+
+        <button onclick="uploadPDF()">
+            Upload
+        </button>
+
+    </div>
+
+    <div class="summary">
+
+        <h3>
+            Total Amount Spended
+        </h3>
+
+        <canvas id="expenseChart">
+        </canvas>
+
+    </div>
+
+    <div id="result">
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

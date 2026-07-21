@@ -1,0 +1,85 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:Times New Roman;
+    background:#ffffff;
+}
+
+.container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:350px;
+    background:rgb(243, 238, 238);
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#478bf2;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#1a68c3;
+    color:white;
+    border:1px solid #1a68c3;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#005edc;
+}
+
+.dashboard{
+    width:90%;
+    margin:auto;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:white;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.upload-card{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.summary{
+    background:white;
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+}
+
+#result{
+    margin-top:20px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
